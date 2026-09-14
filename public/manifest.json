@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Episodio al azar — Netflix y HBO Max",
+  "version": "0.2.2",
+  "description": "Sortea una temporada y un episodio de la serie abierta en Netflix o HBO Max.",
+  "permissions": ["activeTab", "scripting"],
+  "action": { "default_title": "Episodio al azar", "default_popup": "popup.html" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}

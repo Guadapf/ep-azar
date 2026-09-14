@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Episodio al azar</title>
+  </head>
+  <body>
+    <main>
+      <header><span class="dice" aria-hidden="true">⚄</span><span>UNA SERIE, UNA SORPRESA</span></header>
+      <h1>Episodio al azar<span class="dot">.</span></h1>
+      <p class="intro">Volvé a tu serie favorita.<br>Dejá que el azar elija el capítulo.</p>
+      <section class="series-card" aria-label="Serie actual">
+        <span id="platform" class="eyebrow">NETFLIX · HBO MAX</span>
+        <h2 id="series">Buscando tu serie…</h2>
+        <p id="rule">Temporada al azar + episodio al azar</p>
+      </section>
+      <div id="result" class="result" hidden>
+        <span id="season" class="eyebrow"></span>
+        <h3 id="episode"></h3>
+      </div>
+      <p id="status" role="status" aria-live="polite">Conectando con la pestaña…</p>
+      <button id="shuffle" type="button" disabled><span aria-hidden="true">↝</span> Episodio al azar</button>
+      <button id="open" class="secondary" type="button" hidden>Abrir episodio elegido</button>
+      <footer id="playback-note">Se reproduce en el sitio con tu sesión.</footer>
+    </main>
+    <script type="module" src="/src/popup.ts"></script>
+  </body>
+</html>
