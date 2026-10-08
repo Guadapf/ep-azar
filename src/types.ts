@@ -1,6 +1,6 @@
 export interface Series { id: string; title: string }
 export interface Season { id: string; title: string; episodeCount?: number }
-export interface Episode { id: string; title: string; number: number; url: string }
+export interface Episode { id: string; title: string; number: number; url: string; duration?: number }
 export interface Selection { series: Series; season: Season; episode: Episode }
 export interface EpisodeRow { episode: Episode; element: HTMLElement }
 export interface StreamingAdapter {
@@ -14,5 +14,7 @@ export interface Status {
   message: string;
   series?: Series;
   selection?: Selection;
+  continuous?: boolean;
+  next?: Selection;
 }
-export interface Command { channel: 'streaming-random-v2'; type: 'status' | 'start' | 'open'; seriesId?: string }
+export interface Command { channel: 'streaming-random-v2'; type: 'status' | 'start' | 'open' | 'start-continuous' | 'stop-continuous' | 'reroll'; seriesId?: string }

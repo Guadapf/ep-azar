@@ -25,6 +25,7 @@ chrome.runtime.onMessage.addListener((request, sender, reply) => {
 chrome.tabs.onUpdated.addListener((tab, change) => {
   if (!change.url && change.status !== 'complete') return;
   void sessions.serial(tab, async () => {
+    if (!await sessions.ports.get(tab)) return;
     // Read the current URL; older onUpdated events can arrive after our own navigation.
     const current = await chrome.tabs.get(tab);
     const session = await sessions.changed(tab, current.url ?? '');

@@ -1,6 +1,7 @@
 import { providerFor } from './providers.ts';
 import type { Provider } from './providers.ts';
 import { waitFor } from './wait.ts';
+import { playbackVideo } from './playback.ts';
 import { pick } from './random.ts';
 import type { Selection, Status, StreamingAdapter } from './types.ts';
 
@@ -31,7 +32,7 @@ export class Controller {
     }
     if (this.busy) return this.state;
     try {
-      if (!provider) throw new Error('Abrí una serie en Netflix o HBO Max.');
+      if (!provider) throw new Error('Abrí una serie en Netflix, HBO Max o Disney+.');
       const { series } = provider.readSeries(this.doc, this.url());
       if (this.hasEnteredPlayer || this.state.series?.id !== series.id || this.state.series?.title !== series.title) {
         this.state = { phase: 'idle', series, message: 'Primero una temporada. Después, un episodio.' };
@@ -49,7 +50,7 @@ export class Controller {
     if (this.busy) return this.state;
     try {
       const provider = providerFor(this.url());
-      if (!provider) throw new Error('Abrí una serie en Netflix o HBO Max.');
+      if (!provider) throw new Error('Abrí una serie en Netflix, HBO Max o Disney+.');
       this.provider = provider;
       this.adapter = provider.create(this.doc, this.url);
       if (!expectedSeriesId || this.adapter.context.series.id !== expectedSeriesId) throw new Error('La serie cambió. Revisá la ficha y volvé a sortear.');
@@ -95,7 +96,7 @@ export class Controller {
       let lastTime: number | undefined;
       await waitFor(() => {
         if (!isSelectedPlayer()) return;
-        const video = this.doc.querySelector('video');
+        const video = playbackVideo(this.doc, this.url());
         if (!video || video.paused || video.readyState < 2) return;
         const advancing = lastTime !== undefined && video.currentTime > lastTime;
         lastTime = video.currentTime;

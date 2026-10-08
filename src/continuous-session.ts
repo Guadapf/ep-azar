@@ -27,7 +27,10 @@ export interface SessionPorts {
 // All mutations are serialized per tab, including navigation events and double clicks.
 export class Sessions {
   private jobs = new Map<number, Promise<unknown>>();
-  constructor(readonly ports: SessionPorts, readonly random = Math.random, readonly now = Date.now) {}
+  readonly ports: SessionPorts;
+  readonly random: () => number;
+  readonly now: () => number;
+  constructor(ports: SessionPorts, random = Math.random, now = Date.now) { this.ports = ports; this.random = random; this.now = now; }
   serial<T>(tab: number, job: () => Promise<T>): Promise<T> {
     const result = (this.jobs.get(tab) ?? Promise.resolve()).catch(() => {}).then(job);
     this.jobs.set(tab, result);
@@ -66,7 +69,7 @@ export class Sessions {
     if (token && (session.id !== token.id || session.generation !== token.generation)) return view(session);
     if (type === 'stop') { await this.ports.remove(tab); return; }
     const url = await this.ports.url(tab);
-    if (!this.matches(session, url)) return;
+    if (!this.matches(session, url)) return session.error ? view(session) : undefined;
     if (type === 'reroll') session.next = pickNext(session.catalog, this.random);
     if (type === 'arm') session.endUntil = this.now() + (Math.max(0, Math.min(remaining, 120)) + 20) * 1000;
     if (type === 'disarm') delete session.endUntil;

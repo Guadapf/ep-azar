@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="silver" x2="0.7" y2="1">
+      <stop stop-color="#edf0e6"/><stop offset="1" stop-color="#929f90"/>
+    </linearGradient>
+    <linearGradient id="glass" x2="0.5" y2="1">
+      <stop stop-color="#204b38"/><stop offset="1" stop-color="#091d15"/>
+    </linearGradient>
+  </defs>
+  <rect x="23" y="113" width="22" height="7" rx="3" fill="#536257"/>
+  <rect x="83" y="113" width="22" height="7" rx="3" fill="#536257"/>
+  <rect x="7" y="8" width="114" height="107" rx="18" fill="url(#silver)" stroke="#536257" stroke-width="3"/>
+  <rect x="16" y="17" width="96" height="77" rx="16" fill="#46564a"/>
+  <rect x="21" y="22" width="86" height="67" rx="13" fill="url(#glass)" stroke="#14291d" stroke-width="2"/>
+  <path d="M56 39 79 55 56 71Z" fill="#a9f39a"/>
+  <path d="M30 32H45" stroke="#ffffff" stroke-opacity=".15" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="26" cy="103" r="3" fill="#a9f39a" stroke="#536257"/>
+  <path d="M81 101H102M81 105H102" stroke="#657468" stroke-width="2" stroke-linecap="round"/>
+</svg>
